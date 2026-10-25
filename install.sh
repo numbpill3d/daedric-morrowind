@@ -25,6 +25,11 @@ for arg in "$@"; do
     esac
 done
 
+if (( ! do_user && ! do_system )); then
+    echo "--user-only and --system-only cannot be used together" >&2
+    exit 1
+fi
+
 fetch() {
     local repo=daedric-morrowind-$1 dir=$PIECES/daedric-morrowind-$1
     if [[ -d $dir/.git ]]; then
